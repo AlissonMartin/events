@@ -1,11 +1,10 @@
 package com.github.AlissonMartin.events.domain.event;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.github.AlissonMartin.events.domain.address.Address;
+import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "events")
 @Entity
@@ -26,6 +25,9 @@ public class Event {
     private boolean remote;
 
     private Date date;
+
+    @OneToMany(mappedBy = "event")
+    private List<Address> addressList;
 
     public int getId() {
         return id;
@@ -81,5 +83,13 @@ public class Event {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public List<Address> getAddressList() {
+        return addressList;
+    }
+
+    public void setAddressList(List<Address> addressList) {
+        this.addressList = addressList;
     }
 }

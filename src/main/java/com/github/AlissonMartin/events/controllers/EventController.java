@@ -29,7 +29,7 @@ public class EventController {
 
   @GetMapping
 
-  public ResponseEntity<List<Event>> list() {
+  public ResponseEntity<List<Event>> list(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
     List<Event> events = eventRepository.findAll();
     return ResponseEntity.ok(events);
   }
