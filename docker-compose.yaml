@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_DB: events
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - "5432:5432"
+  app:
+    image: events_image
+    container_name: events
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/events
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 12345678
+    depends_on:
+      - db
