@@ -26,8 +26,8 @@ public class Event {
 
     private Date date;
 
-    @OneToMany(mappedBy = "event")
-    private List<Address> addressList;
+    @OneToOne(mappedBy = "event", cascade = CascadeType.ALL)
+    private Address address;
 
     public int getId() {
         return id;
@@ -85,11 +85,11 @@ public class Event {
         this.date = date;
     }
 
-    public List<Address> getAddressList() {
-        return addressList;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddressList(List<Address> addressList) {
-        this.addressList = addressList;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

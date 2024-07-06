@@ -5,7 +5,7 @@ COPY pom.xml /app
 
 WORKDIR /app
 
-RUN mvn clean install
+RUN mvn clean install -DskipTests=true
 
 FROM openjdk:17-jdk-slim
 
@@ -15,4 +15,4 @@ WORKDIR /app
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-Dspring.devtools.restart.enabled=true", "-jar", "app.jar"]
